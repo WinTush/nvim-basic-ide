@@ -113,6 +113,13 @@ return packer.startup(function(use)
     }
     use { "ellisonleao/glow.nvim" }
     use { "p00f/nvim-ts-rainbow" }
+    use {
+        "ethanholz/nvim-lastplace",
+        event = "BufRead",
+        config = function()
+            require("user.nvim-lastplace").config()
+        end,
+    }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
