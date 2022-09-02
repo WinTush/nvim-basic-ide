@@ -100,6 +100,7 @@ local mappings = {
         "Find files",
     },
     ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
+    ["G"] = { "<cmd>Glow<cr>", "Glow Preview" },
     ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
 
     p = {
