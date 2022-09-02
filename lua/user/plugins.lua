@@ -98,6 +98,13 @@ return packer.startup(function(use)
 
     use { "Pocco81/auto-save.nvim", config = function() require("auto-save").setup {} end }
     use { "folke/which-key.nvim", config = function() require("which-key").setup {} end }
+    use {
+        "ray-x/lsp_signature.nvim",
+        event = "BufRead",
+        config = function()
+            require "lsp_signature".setup()
+        end
+    }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
