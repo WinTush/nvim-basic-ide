@@ -158,6 +158,14 @@ return packer.startup(function(use)
             })
         end,
     }
+    use {
+        'gelguy/wilder.nvim',
+        config = function()
+            require("user.wilder").config()
+        end,
+    }
+    use { "romgrk/fzy-lua-native" }
+    use { "nixprime/cpsm" }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
