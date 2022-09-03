@@ -125,6 +125,12 @@ local mappings = {
     o = { "<cmd>AerialToggle!<cr>", "Code Outline" },
   },
 
+  e = {
+    name = "Explorer",
+    e = { "<cmd>NvimTreeToggle<cr>", "Nvim Tree" },
+    r = { "<cmd>RnvimrToggle<cr>", "Ranger" },
+  },
+
   p = {
     name = "Packer",
     c = { "<cmd>PackerCompile<cr>", "Compile" },
