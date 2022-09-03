@@ -90,12 +90,14 @@ local mappings = {
   ["q"] = { "<cmd>q!<CR>", "Quit" },
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
+  ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["f"] = {
     "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
     "Find files",
   },
   ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
   ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+  ["r"] = { "<cmd>RnvimrToggle<cr>", "Ranger" },
 
   b = {
     name = "Buffers",
@@ -122,12 +124,6 @@ local mappings = {
       "Sort by language",
     },
     o = { "<cmd>AerialToggle!<cr>", "Code Outline" },
-  },
-
-  e = {
-    name = "Explorer",
-    e = { "<cmd>NvimTreeToggle<cr>", "Nvim Tree" },
-    r = { "<cmd>RnvimrToggle<cr>", "Ranger" },
   },
 
   p = {
