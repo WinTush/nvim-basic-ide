@@ -215,6 +215,12 @@ return packer.startup(function(use)
       }
     end,
   }
+  use {
+    "windwp/nvim-ts-autotag",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
