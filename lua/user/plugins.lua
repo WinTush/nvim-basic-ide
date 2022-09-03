@@ -3,30 +3,30 @@ local fn = vim.fn
 -- Automatically install packer
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-    PACKER_BOOTSTRAP = fn.system {
-        "git",
-        "clone",
-        "--depth",
-        "1",
-        "https://github.com/wbthomason/packer.nvim",
-        install_path,
-    }
-    print "Installing packer close and reopen Neovim..."
-    vim.cmd [[packadd packer.nvim]]
+  PACKER_BOOTSTRAP = fn.system {
+    "git",
+    "clone",
+    "--depth",
+    "1",
+    "https://github.com/wbthomason/packer.nvim",
+    install_path,
+  }
+  print "Installing packer close and reopen Neovim..."
+  vim.cmd [[packadd packer.nvim]]
 end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]]
+-- vim.cmd [[
+--   augroup packer_user_config
+--     autocmd!
+--     autocmd BufWritePost plugins.lua source <afile> | PackerSync
+--   augroup end
+-- ]]
 
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
-    return
+  return
 end
 
 -- Have packer use a popup window
@@ -177,10 +177,103 @@ return packer.startup(function(use)
         cmd = {"Bracey", "BraceyStop", "BraceyReload", "BraceyEval"},
         run = "npm install --prefix server",
     }
+  use {
+    "Pocco81/auto-save.nvim",
+    config = function()
+      require("auto-save").setup {}
+    end,
+  }
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      require("which-key").setup {}
+    end,
+  }
+  use {
+    "ray-x/lsp_signature.nvim",
+    event = "BufRead",
+    config = function()
+      require("lsp_signature").setup()
+    end,
+  }
+  use { "ellisonleao/glow.nvim" }
+  use { "p00f/nvim-ts-rainbow" }
+  use {
+    "ethanholz/nvim-lastplace",
+    event = "BufRead",
+    config = function()
+      require("user.nvim-lastplace").config()
+    end,
+  }
+  use {
+    "tpope/vim-surround",
+    keys = { "c", "d", "y" },
+    -- make sure to change the value of `timeoutlen` if it's not triggering correctly, see https://github.com/tpope/vim-surround/issues/117
+    -- setup = function()
+    --  vim.o.timeoutlen = 500
+    -- end
+  }
+  use {
+    "nvim-treesitter/nvim-treesitter-context",
+    config = function()
+      require("treesitter-context").setup {
+        enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+        throttle = true, -- Throttles plugin updates (may improve performance)
+        max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+        patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+          -- For all filetypes
+          -- Note that setting an entry here replaces all other patterns for this entry.
+          -- By setting the 'default' entry below, you can control which nodes you want to
+          -- appear in the context window.
+          default = {
+            "class",
+            "function",
+            "method",
+          },
+        },
+      }
+    end,
+  }
+  use {
+    "stevearc/aerial.nvim",
+    config = function()
+      require("aerial").setup()
+      require("lspconfig").vimls.setup {
+        on_attach = require("aerial").on_attach,
+      }
+    end,
+  }
+  use {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup({ "css", "scss", "html", "javascript" }, {
+        RGB = true, -- #RGB hex codes
+        RRGGBB = true, -- #RRGGBB hex codes
+        RRGGBBAA = true, -- #RRGGBBAA hex codes
+        rgb_fn = true, -- CSS rgb() and rgba() functions
+        hsl_fn = true, -- CSS hsl() and hsla() functions
+        css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+        css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+      })
+    end,
+  }
+  use {
+    "gelguy/wilder.nvim",
+    config = function()
+      require("user.wilder").config()
+    end,
+  }
+  use { "romgrk/fzy-lua-native" }
+  use { "nixprime/cpsm" }
+  use {
+    "turbio/bracey.vim",
+    cmd = { "Bracey", "BraceyStop", "BraceyReload", "BraceyEval" },
+    run = "npm install --prefix server",
+  }
 
-    -- Automatically set up your configuration after cloning packer.nvim
-    -- Put this at the end after all plugins
-    if PACKER_BOOTSTRAP then
-        require("packer").sync()
-    end
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
+  if PACKER_BOOTSTRAP then
+    require("packer").sync()
+  end
 end)
