@@ -280,6 +280,12 @@ return packer.startup(function(use)
       vim.g.mkdp_auto_start = 1
     end,
   }
+  use {
+    "ggandor/leap.nvim",
+    config = function()
+      require("leap").set_default_keymaps()
+    end,
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
