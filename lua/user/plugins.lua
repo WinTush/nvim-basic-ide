@@ -172,6 +172,11 @@ return packer.startup(function(use)
     }
     use { "romgrk/fzy-lua-native" }
     use { "nixprime/cpsm" }
+    use {
+        "turbio/bracey.vim",
+        cmd = {"Bracey", "BraceyStop", "BraceyReload", "BraceyEval"},
+        run = "npm install --prefix server",
+    }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
