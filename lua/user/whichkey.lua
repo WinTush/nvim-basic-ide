@@ -86,10 +86,6 @@ local xopts = {
 local mappings = {
   ["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment" },
   ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
-  ["b"] = {
-    "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-    "Buffers",
-  },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["q"] = { "<cmd>q!<CR>", "Quit" },
@@ -100,9 +96,34 @@ local mappings = {
     "Find files",
   },
   ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
-  ["G"] = { "<cmd>Glow<cr>", "Glow Preview" },
   ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
-  ["o"] = { "<cmd>AerialToggle!<cr>", "Code Outline" },
+
+  b = {
+    name = "Buffers",
+    j = { "<cmd>BufferLinePick<cr>", "Jump" },
+    f = { "<cmd>Telescope buffers<cr>", "Find" },
+    b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
+    n = { "<cmd>BufferLineCycleNext<cr>", "Next" },
+    -- w = { "<cmd>BufferWipeout<cr>", "Wipeout" }, -- TODO: implement this for bufferline
+    e = {
+      "<cmd>BufferLinePickClose<cr>",
+      "Pick which buffer to close",
+    },
+    h = { "<cmd>BufferLineCloseLeft<cr>", "Close all to the left" },
+    l = {
+      "<cmd>BufferLineCloseRight<cr>",
+      "Close all to the right",
+    },
+    D = {
+      "<cmd>BufferLineSortByDirectory<cr>",
+      "Sort by directory",
+    },
+    L = {
+      "<cmd>BufferLineSortByExtension<cr>",
+      "Sort by language",
+    },
+    o = { "<cmd>AerialToggle!<cr>", "Code Outline" },
+  },
 
   p = {
     name = "Packer",
@@ -195,6 +216,10 @@ local mappings = {
     R = { "<cmd>Telescope registers<cr>", "Registers" },
     k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
     C = { "<cmd>Telescope commands<cr>", "Commands" },
+        p = {
+          "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>",
+          "Colorscheme with Preview",
+        },
   },
 
   t = {

@@ -28,13 +28,6 @@ keymap("n", "<C-Down>", ":resize +2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
--- Navigate buffers
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
-
--- Clear highlights
-keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
-
 -- Close buffers
 keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
 
@@ -45,21 +38,25 @@ keymap("v", "p", '"_dP', opts)
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
 
+-- Move current line / block with Alt-j/k ala vscode.
+keymap("i", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
+-- Move iurrent line / block with Alt-j/k ala vscode.
+keymap("i", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
+-- navigition
+keymap("i", "<A-Up>", "<C-\\><C-N><C-w>k", opts)
+keymap("i", "<A-Down>", "<C-\\><C-N><C-w>j", opts)
+keymap("i", "<A-Left>", "<C-\\><C-N><C-w>h", opts)
+keymap("i", "<A-Right>", "<C-\\><C-N><C-w>l", opts)
+
 -- Visual --
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
--- Plugins --
+-- Move selected line / block of text in visual mode
+keymap("v", "K", ":move '<-2<CR>gv-gv", opts)
+keymap("v", "J", ":move '>+1<CR>gv-gv", opts)
 
--- NvimTree
-keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
-
--- Telescope
-keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
-keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
-keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
-keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
-
--- Git
-keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
+-- Move current line / block with Alt-j/k ala vscode.
+keymap("v", "<A-j>", ":m '>+1<CR>gv-gv", opts)
+keymap("v", "<A-k>", ":m '<-2<CR>gv-gv", opts)
