@@ -31,6 +31,10 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 -- Close buffers
 keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
 
+-- Better line navigation
+keymap("n", "<S-h>", "^", opts)
+keymap("n", "<S-l>", "$", opts)
+
 -- Better paste
 keymap("v", "p", '"_dP', opts)
 
