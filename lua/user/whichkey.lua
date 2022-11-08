@@ -84,7 +84,7 @@ local xopts = {
 }
 
 local mappings = {
-  ["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment" },
+  ["/"] = { "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", "Comment" },
   ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["q"] = { "<cmd>q!<CR>", "Quit" },
@@ -236,7 +236,7 @@ local mappings = {
 }
 
 local xmappings = {
-  ["/"] = { "<esc><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", "Comment" },
+  ["/"] = { "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", "Comment" },
 }
 
 which_key.setup(setup)
